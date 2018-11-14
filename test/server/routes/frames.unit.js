@@ -76,7 +76,7 @@ describe('FramesRouter', function() {
       ).callsArgWith(1, new Error('Panic!'));
       framesRouter.createFrame(request, response, function(err) {
         _frameCreate.restore();
-        expect(err.message).to.equal('Panic!');
+        expect(err.message).to.equal('Could not create frame: Panic!');
         done();
       });
     });
@@ -276,7 +276,7 @@ describe('FramesRouter', function() {
       let audit = {};
       framesRouter._publishContract(nodes, contract, audit, (err) => {
         expect(err).to.be.instanceOf(Error);
-        expect(err.message).to.equal('test');
+        expect(err.message).to.equal('Could not save contract: test');
         done();
       });
     });
@@ -344,7 +344,7 @@ describe('FramesRouter', function() {
       framesRouter._getContractForShard(contract, audits, [], res, function(err) {
         _contractsLoad.restore();
         _getStorageOffer.restore();
-        expect(err.message).to.equal('No storage offers received');
+        expect(err.message).to.equal('Could not get storage offers: No storage offers received');
         done();
       });
     });
@@ -405,7 +405,7 @@ describe('FramesRouter', function() {
           _contractsLoad.restore();
           _getStorageOffer.restore();
           _contractsSave.restore();
-          expect(err.message).to.equal('Failed to save');
+          expect(err.message).to.equal('Could not save contract: Failed to save');
           done();
         }
       );
@@ -596,7 +596,7 @@ describe('FramesRouter', function() {
         'findOne'
       ).callsArgWith(1, new Error('Panic!'));
       framesRouter.addShardToFrame(request, response, function(err) {
-        expect(err.message).to.equal('Panic!');
+        expect(err.message).to.equal('Could not add shard to frame: Panic!');
         done();
       });
     });
@@ -689,7 +689,7 @@ describe('FramesRouter', function() {
         .callsArgWith(3, null, { token: 'token' });
 
       framesRouter.addShardToFrame(request, response, function(err) {
-        expect(err.message).to.equal('Panic!');
+        expect(err.message).to.equal('Could not save pointer: Panic!');
         done();
       });
     });
@@ -740,7 +740,7 @@ describe('FramesRouter', function() {
         'fromRecords'
       ).throws(new Error('Invalid audit stream'));
       framesRouter.addShardToFrame(request, response, function(err) {
-        expect(err.message).to.equal('Invalid audit stream');
+        expect(err.message).to.equal('Could not add shard to frame: Invalid audit stream');
         done();
       });
     });
@@ -789,7 +789,7 @@ describe('FramesRouter', function() {
       framesRouter.addShardToFrame(request, response, function(err) {
         expect(err).to.be.instanceOf(errors.BadRequestError);
         expect(err.message)
-          .to.equal('Invalid contract specification was supplied');
+          .to.equal('Could not add shard to frame: Invalid contract specification was supplied');
         done();
       });
     });
@@ -1045,7 +1045,7 @@ describe('FramesRouter', function() {
         'getConsignmentPointer'
       ).callsArgWith(3, null, { token: 'token' });
       framesRouter.addShardToFrame(request, response, function(err) {
-        expect(err.message).to.equal('Cannot reload frame');
+        expect(err.message).to.equal('Could not create pointer: Cannot reload frame');
         done();
       });
     });
@@ -1126,7 +1126,7 @@ describe('FramesRouter', function() {
       });
       framesRouter.addShardToFrame(request, response, function(err) {
         expect(err).to.be.instanceOf(errors.InternalError);
-        expect(err.message).to.equal('test');
+        expect(err.message).to.equal('Could not add shard: test');
         done();
       });
     });
@@ -2049,7 +2049,7 @@ describe('FramesRouter', function() {
       ).callsArgWith(1, new Error('Panic!'));
       framesRouter.destroyFrameById(request, response, function(err) {
         _bucketEntryFindOne.restore();
-        expect(err.message).to.equal('Panic!');
+        expect(err.message).to.equal('Could not destroy frame: Panic!');
         done();
       });
     });
@@ -2106,7 +2106,7 @@ describe('FramesRouter', function() {
       framesRouter.destroyFrameById(request, response, function(err) {
         _frameFindOne.restore();
         _bucketEntryFindOne.restore();
-        expect(err.message).to.equal('Panic!');
+        expect(err.message).to.equal('Could not destroy frame: Panic!');
         done();
       });
     });
@@ -2171,7 +2171,7 @@ describe('FramesRouter', function() {
         _frameFindOne.restore();
         _bucketEntryFindOne.restore();
         _frameRemove.restore();
-        expect(err.message).to.equal('Panic!');
+        expect(err.message).to.equal('Could not destroy frame: Panic!');
         done();
       });
     });
@@ -2237,7 +2237,7 @@ describe('FramesRouter', function() {
       });
       framesRouter.getFrames(request, response, function(err) {
         _frameFind.restore();
-        expect(err.message).to.equal('Panic!');
+        expect(err.message).to.equal('Could not get frame: Panic!');
         done();
       });
     });
@@ -2297,7 +2297,7 @@ describe('FramesRouter', function() {
       ).callsArgWith(1, new Error('Panic!'));
       framesRouter.getFrameById(request, response, function(err) {
         _frameFindOne.restore();
-        expect(err.message).to.equal('Panic!');
+        expect(err.message).to.equal('Could not get frame: Panic!');
         done();
       });
     });
